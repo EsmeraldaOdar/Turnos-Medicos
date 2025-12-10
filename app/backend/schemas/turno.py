@@ -27,6 +27,10 @@ class TurnoOut(BaseModel):
     paciente_nroPaciente: int = Field(alias="Paciente_nroPaciente")
     medico_matricula: str = Field(alias="Medico_Matricula")
     especialidad_id: int = Field(alias="Especialidad_Id")
+    
+    nombre_especialidad: str | None = None
+    nombre_medico: str | None = None
+    
     estado: str | None = Field(default=None)   # <-- se usa la propiedad @property "estado"
 
     class Config:

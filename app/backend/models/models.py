@@ -214,6 +214,21 @@ class Turno(Base):
     estado_rel = relationship("Estado")
     Paciente = relationship("Paciente")
     Medico = relationship("Medico")
+    Especialidad = relationship("Especialidad")
+    
+    @property
+    def nombre_medico(self):
+        """Retorna el nombre completo del médico para la serialización."""
+        # Se asume que la relación 'Medico' ya fue cargada con joinedload
+        if self.Medico:
+            return f"{self.Medico.Nombre} {self.Medico.Apellido}"
+        return None
+
+    @property
+    def nombre_especialidad(self):
+        """Retorna la descripción de la especialidad para la serialización."""
+        # Se asume que la relación 'Especialidad' ya fue cargada con joinedload
+        return self.Especialidad.Descripcion if self.Especialidad else None
     
     # PROPIEDAD PARA OBTENER EL NOMBRE DEL ESTADO (Texto)
     @property
