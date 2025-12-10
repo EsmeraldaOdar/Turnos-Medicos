@@ -1,0 +1,26 @@
+.layout-container {
+    display: flex; /* Ponemos los elementos uno al lado del otro */
+}
+
+.main-content {
+    /* IMPORTANTE: Dejamos el espacio que ocupa tu navbar (190px) */
+    margin-left: 190px; 
+    padding: 40px; /* Un poco de aire para el contenido */
+    width: 100%;
+    background-color: #f4f6f9; /* Un gris muy clarito de fondo queda profesional */
+    min-height: 100vh; /* Que ocupe todo el alto */
+}
+
+/* --- MAGIA RESPONSIVE --- */
+/* Cuando la pantalla sea de 768px o menos (Tablets y Celulares) */
+@media (max-width: 768px) {
+    .layout-container {
+        flex-direction: column; /* Ponemos uno arriba del otro */
+    }
+
+    .main-content {
+        margin-left: 0; /* Ya no dejamos espacio a la izquierda */
+        margin-top: 70px; /* Dejamos espacio ARRIBA porque el menú irá arriba */
+        padding: 20px; /* Menos padding en pantallas chicas */
+    }
+}

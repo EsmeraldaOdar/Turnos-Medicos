@@ -1,0 +1,97 @@
+.navbar {
+    background-color: #2f4670ff;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 190px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    text-align: center;
+
+}
+
+.menu-toggle {
+    display: none; /* Oculto por defecto */
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+.menu-item:hover {
+    background-color: #3b5585; /* Un color de hover para estética */
+}
+
+/* --- MÓVIL (Menos de 768px) --- */
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%;       /* Ancho total */
+        height: 70px;      /* Altura fija solo para la barra superior */
+        flex-direction: row; /* Elementos horizontales */
+        justify-content: space-between; /* Título a la izq, botón a la der */
+        align-items: center;
+        padding: 0 20px;
+        position: fixed; 
+    }
+
+    /* Ajuste para que el título no tenga margen abajo en mobile */
+    .title {
+        display: none;
+    }
+
+    /* Mostramos el botón hamburguesa */
+    .menu-toggle {
+        display: block;
+        background: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        color: rgb(165, 165, 168);
+        /* Truco extra para móviles: Quita el parpadeo gris al tocar en Android/iOS */
+        -webkit-tap-highlight-color: transparent;
+        
+    }
+
+    .menu-toggle:focus, .menu-toggle:active {
+        outline: none;
+        border: none;
+        background: transparent;
+    }
+
+    /* El menú oculto por defecto */
+    .menu {
+        position: absolute;
+        top: 47px; /* Justo debajo de la barra azul (que mide 70px) */
+        left: 0;
+        width: 100%;
+        background-color: #2f4670; /* Mismo color de fondo */
+        padding: 10px;
+        
+        /* MAGIA: Lo escondemos desplazándolo hacia arriba o con display none */
+        display: none; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Cuando React pone la clase "open", lo mostramos */
+    .menu.open {
+        display: flex;
+    }
+}

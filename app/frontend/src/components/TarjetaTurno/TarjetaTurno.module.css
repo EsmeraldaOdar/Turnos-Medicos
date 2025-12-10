@@ -1,0 +1,58 @@
+.tarjeta {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s;
+}
+
+.tarjeta:hover {
+    transform: scale(1.02);
+}
+
+
+.detalles {
+    margin-top: 12px;
+}
+.estado {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.confirmado {
+    border-left: 6px solid #4CAF50; /* Verde para confirmado */
+}
+
+.cancelado {
+    border-left: 6px solid #F44336; /* Rojo para cancelado */
+}
+
+.pendiente {
+    border-left: 6px solid #FF9800; /* Naranja para pendiente */
+}
+
+.atendido {
+    border-left: 6px solid #2196F3; /* Azul para atendido */
+}
+
+.finalizado {
+    border-left: 6px solid #9C27B0; /* Morado para finalizado */
+}
+
+.ausente {
+    border-left: 6px solid #607D8B; /* Gris para ausente */
+}
+
+.anunciado {
+    border-left: 6px solid #3F51B5; /* Azul oscuro para anunciado */
+}
+
+.neutro {
+    border-left: 6px solid #BDBDBD; /* Gris claro para estado neutro o por defecto */
+}
