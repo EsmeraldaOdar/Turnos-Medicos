@@ -1,0 +1,136 @@
+@import "tailwindcss";
+.contentWrapper {
+    width: 100%;
+    margin: 0; /* Más aire para que se vea como Stitch */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    outline: 2px solid blue;
+}
+
+
+/* Header */
+.topHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+
+.titleArea h1 {
+    font-family: 'Manrope', sans-serif;
+    color: #0f172a;
+    font-size: clamp(1.875rem, 5vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.0em;
+    margin-bottom: 0.5rem;
+    /*outline: purple solid 2px;*/
+    display: flex;
+}
+
+.titleArea p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.btnNuevoTurno {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #1e40af; /* primary */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.2);
+    transition: background 0.2s;
+}
+
+.btnNuevoTurno:hover {
+    background-color: #1e3a8a;
+}
+
+/* Barra de Filtros y Búsqueda */
+.filterBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+    gap: 1rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.filterGroups {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+}
+
+.filterBtn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: #64748b;
+    transition: all 0.2s;
+}
+
+.filterBtnActive {
+    background: #0f172a;
+    color: white;
+}
+
+.filterBtn:hover:not(.filterBtnActive) {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+/* Buscador */
+.searchWrapper {
+    position: relative;
+    width: 300px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 20px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+.searchInput:focus {
+    border-color: #1e40af;
+    grid: 1px solid #1e40af;
+}
+
+/* Grid */
+.gridTurnos {
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}

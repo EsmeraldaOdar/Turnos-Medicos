@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './navbar'; 
 import './layout.css'; 
 
+
 // "children" es una prop especial de React. 
 // Representa "lo que sea que pongas adentro de este componente".
 function Layout({ children }) {

@@ -1,16 +1,63 @@
 .navbar {
-    background-color: #2f4670ff;
-    padding: 20px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 190px;
     position: fixed;
-    left: 0;
     top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background-color: #0f172a;
+    color: white;
+    padding: 20px;
+
     box-shadow: 2px 0 8px rgba(0,0,0,0.15);
     z-index: 1000;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profileContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 0.5rem;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid white;
+    flex-shrink: 0;
+}
+
+.brandInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.brandName {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.2;
+}
+
+.portalTag {
+    color: #bfdbfe; /* Azul clarito de Stitch */
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
 }
 
 .title {
@@ -28,16 +75,18 @@
 .menu-item {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
-    color: white;
+    gap: 15px;
+    padding: 12px 16px;
+    color: #cbd5e1;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 8px;
     margin-bottom: 10px;
     transition: background-color 0.3s;
+    font-weight: 500;
 }
 .menu-item:hover {
     background-color: #3b5585; /* Un color de hover para estética */
+    color: white;
 }
 
 /* --- MÓVIL (Menos de 768px) --- */
@@ -50,6 +99,35 @@
         align-items: center;
         padding: 0 20px;
         position: fixed; 
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .profileContainer {
+        gap: 0.75rem;
+    }
+    
+    .avatar {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .portalTag {
+        display: none; /* Ocultamos el tag en móvil para ahorrar espacio */
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 70px; /* Dejamos espacio ABAJO para el menú */
+        padding: 20px;
     }
 
     /* Ajuste para que el título no tenga margen abajo en mobile */

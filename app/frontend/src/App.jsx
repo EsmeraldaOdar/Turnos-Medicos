@@ -1,5 +1,4 @@
 import './App.css'
-import Boton from './components/boton'
 import Layout from './components/layout'
 import {Routes, Route} from 'react-router-dom'
 

@@ -1,47 +1,108 @@
-import React, {useState}  from 'react';
-import { useEffect } from 'react';
-import {obtenerMisTurnos} from '../services/turnosService';
+import React from 'react';
+import { useTurnos } from '../hooks/useTurnos';
 import TarjetaTurno from '../components/TarjetaTurno/TarjetaTurno';
+import ModelConfirmacion from '../components/Modal/ModalConfirmacion'; 
+import { useModal } from '../hooks/useModal'; 
+import Select from '../components/Select/select';
+import styles from './MisTurnos.module.css';
 
 function MisTurnos() {
-    const [turnos, setTurnos] = useState([]);
-    const [cargando, setCargando] = useState(true);
+    const { turnos, filtro, setFiltro, cargando, error, cancelar, cambiarEstadoTurno } = useTurnos();
 
-    useEffect(() => {
-        const traerDatos = async () => {
+    const { isOpen, openModal, closeModal, data: idParaEliminar } = useModal();
+    const confirmarEliminacion = async () => {
+        console.log("Turno a eliminar con ID:", idParaEliminar);
         try {
-            const datosDelBackend = await obtenerMisTurnos();
-            setTurnos(datosDelBackend);
-        } catch (error) {
-            console.error("Error trayendo los turnos", error);
-            alert("Hubo un error cargando los turnos");
-        } finally {
-            setCargando(false); // Terminó de cargar (bien o mal)
+            await cancelar(idParaEliminar);
+            closeModal();
+        } catch (err) {
+            console.error("Error al cancelar el turno:", err);
+            // Aquí podrías mostrar un mensaje de error al usuario si quieres
         }
-        };
+    }
 
-        traerDatos();
-    }, []);
+    const opcionesFiltro = [
+        { label: 'Pendiente de Confirmación', value: 'Pendientes' },
+        { label: 'Turnos Confirmados', value: 'Confirmados' },
+        { label: 'En Transcurso', value: 'Activos' },
+        { label: 'Turnos Finalizados', value: 'No Activos' }
+    ];
+    if (error) return <p className={styles.error}>Error: {error}</p>;
 
     return (
-        <div>
-            <h2>Mis Turnos</h2>
+        
+        <div className={styles.contentWrapper}>
             
-            {cargando ? (
-                <p>Cargando turnos...</p>
-            ) : (
-                // 3. Recorremos la lista (map) y creamos una Tarjeta por cada turno
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
-                {turnos.map((turno) => (
-                    <TarjetaTurno 
-                    key={turno.id} // React necesita una clave única
-                    turnoData={turno} // Le pasamos toda la info (objeto) del turno como prop
-                    //Esta técnica mantiene el componente MisTurnos simple y delega la responsabilidad de la presentación al componente TarjetaTurno
+            {/* Header con botón de Nuevo Turno */}
+            <header className={styles.topHeader}>
+                <div className={styles.titleArea}>
+                    <h1>Mis Turnos</h1>
+                    <p>Gestiona tus próximas citas médicas y revisa tu historial.</p>
+                </div>
+                <button className={styles.btnNuevoTurno}>
+                    <span className="material-symbols-outlined">add</span>
+                    <span>Nuevo Turno</span>
+                </button>
+            </header>
+
+            {/* Barra de Filtros y Buscador */}
+            <div className={styles.filterBar}>
+                <div className={styles.filterGroups}>
+                    {opcionesFiltro.map((opcion) => (
+                        <button
+                            key={opcion.value}
+                            onClick={() => setFiltro(opcion.value)}
+                            className={`${styles.filterBtn} ${filtro === opcion.value ? styles.filterBtnActive : ''}`}
+                        >
+                            <span className="material-symbols-outlined" style={{fontSize: '18px'}}>
+                                {opcion.icon}
+                            </span>
+                            {opcion.label}
+                        </button>
+                    ))}
+                </div>
+                
+                <div className={styles.searchWrapper}>
+                    <span className={`material-symbols-outlined ${styles.searchIcon}`}>search</span>
+                    <input 
+                        type="text" 
+                        className={styles.searchInput} 
+                        placeholder="Buscar por médico o especialidad..."
                     />
-                ))}
+                </div>
+            </div>
+
+            {/* Listado de Turnos */}
+            {cargando ? (
+                <p>Cargando tus turnos...</p>
+            ) : (
+                <>
+                    {turnos.length === 0 ? (
+                        <p>No tenés turnos agendados en esta categoría.</p>
+                    ) : (
+                        <div className={styles.gridTurnos}>
+                            {turnos.map((turno) => (
+                                <TarjetaTurno 
+                                    key={turno.id} 
+                                    turnoData={turno}                             
+                                    onCancelar={() => openModal(turno.id)}
+                                    onConfirmarTurno ={() => cambiarEstadoTurno(turno.id, 'Confirmado')}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </>
+            )}
+               
+
+            <ModelConfirmacion
+                isOpen={isOpen}
+                onClose={closeModal}
+                onConfirm={confirmarEliminacion}
+                titulo="Confirmar Cancelación"
+                mensaje="¿Estás seguro que querés cancelar este turno?"
+            />
         </div>
-        )}
-    </div>
     );
 }
 export default MisTurnos;

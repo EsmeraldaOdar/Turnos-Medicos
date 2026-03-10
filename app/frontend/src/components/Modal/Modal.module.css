@@ -1,0 +1,94 @@
+/* 1. EL OVERLAY (El fondo oscuro) */
+/* Este div ocupa TODA la pantalla y flota sobre todo lo demás */
+.overlay {
+    position: fixed; /* Se queda quieto aunque hagas scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Negro al 50% de transparencia */
+    
+    /* TRUCO DE CENTRADO: Usamos Flexbox en el padre para centrar al hijo */
+    display: flex;
+    justify-content: center; /* Centrado Horizontal */
+    align-items: center;     /* Centrado Vertical */
+    
+    z-index: 2000; /* Un número alto para asegurar que tape al Navbar */
+    backdrop-filter: blur(2px); /* Un lujito: desenfoca un poco el fondo */
+}
+
+/* 2. LA CAJA DEL MODAL (Lo blanco) */
+.modalContent {
+    background: white;
+    padding: 25px;
+    border-radius: 12px; /* Bordes redondeados modernos */
+    width: 90%;          /* En celular ocupa casi todo el ancho */
+    max-width: 400px;    /* En PC no se estira más de 400px */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra suave para dar profundidad */
+    
+    /* Animación de entrada (opcional pero queda lindo) */
+    animation: aparecer 0.3s ease-out;
+}
+
+/* Estilos para el texto */
+.modalContent h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.modalContent p {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* 3. CONTENEDOR DE BOTONES */
+.modalButtons {
+    display: flex;
+    justify-content: flex-end; /* Los empuja a la derecha */
+    gap: 12px; /* Espacio entre los botones */
+}
+
+/* Estilos base para ambos botones */
+.modalButtons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* 4. BOTÓN CANCELAR (Secundario - Gris) */
+.cancelButton {
+    background-color: #e2e6ea;
+    color: #495057;
+}
+
+.cancelButton:hover {
+    background-color: #dbe0e5;
+}
+
+/* 5. BOTÓN CONFIRMAR (Primario/Peligro - Rojo o Azul) */
+/* Usamos rojo porque generalmente es una acción destructiva */
+.confirmButton {
+    background-color: #dc3545; /* Rojo Bootstrap */
+    color: white;
+}
+
+.confirmButton:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el mouse */
+}
+
+/* Animación simple */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Viene un poquito de arriba */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
